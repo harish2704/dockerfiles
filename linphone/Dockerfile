@@ -1,5 +1,5 @@
-FROM opensuse/tumbleweed:latest
+FROM debian:testing
 
-RUN zypper in -y  linphone-cli
+RUN apt-get update && apt-get install --no-install-recommends -y linphone-cli rlwrap
 
-CMD ["linphonec"]
+CMD [ "rlwrap", "linphonec"]
