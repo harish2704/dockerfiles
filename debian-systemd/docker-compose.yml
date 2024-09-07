@@ -1,0 +1,20 @@
+services:
+  os:
+    build:
+      dockerfile: ./Dockerfile.debian-12
+      context: ./
+    tty: true
+    # cgroup: private
+    environment:
+      myenv: 1
+      container: podman
+      # container: docker
+    # For docker, we may have to manually mount cgroup. Podman handles this gracefully
+    # volumes:
+    #   - /sys/fs/cgroup/debian-12-os1.scope:/sys/fs/cgroup:rw
+    tmpfs:
+      - /tmp
+      - /run/lock/
+      - /run
+    # command: [ "systemd", "--log-target=console" ]
+    # command: ["/bin/bash", "-c", "trap : TERM INT; sleep infinity & wait"]
